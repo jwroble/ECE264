@@ -9,7 +9,16 @@
  */
 int my_strlen(const char * s)
 {
-    return 0;
+    int pos; //Tracks the position in the string
+    
+    pos = 0;
+
+    while(s[pos] != '\0')
+    {
+        pos++;
+    }
+
+    return(pos);
 }
 
 /**
@@ -20,7 +29,24 @@ int my_strlen(const char * s)
  */
 int my_countchar(const char * s, char c)
 {
-    return 0;
+    int pos; //Tracks the position in the string
+    int count; //Counts the number of c's in the string
+
+    pos = 0;
+    count = 0;
+    
+    while(s[pos] != '\0')
+    {
+
+        if(s[pos] == c)
+        {
+            count++;
+        }
+
+        pos++;
+    }
+
+    return(count);
 }
 
 /**
@@ -34,6 +60,15 @@ int my_countchar(const char * s, char c)
  */
 void my_strupper(char * s)
 {
+    int pos; //Tracks the position in the string
+   
+    pos = 0;
+
+    while(s[pos] != '\0')
+    {
+        s[pos] = toupper(s[pos]);
+        pos++;
+    }
 
 }
 
@@ -48,7 +83,15 @@ void my_strupper(char * s)
  */
 void my_strlower(char * s)
 {
+    int pos; //Tracks the position in the string
 
+    pos = 0;
+
+    while(s[pos] != '\0')
+    {
+        s[pos] = tolower(s[pos]);
+        pos++;
+    }
 }
 
 /**
@@ -63,6 +106,16 @@ void my_strlower(char * s)
  */
 void my_strcpy(char * s1, const char * s2)
 {
+    int pos; //Tracks position in the string
+    
+    pos = 0;
+
+    while(s2[pos] !='\0')
+    {
+        s1[pos] = s2[pos];
+        pos++;
+    }
+    s1[pos] = '\0';
 
 }
 
@@ -78,7 +131,16 @@ void my_strcpy(char * s1, const char * s2)
  */
 void my_strncpy(char * s1, const char * s2, int num)
 {
-    
+    int pos; //Tracks position in the string
+
+    pos = 0;
+
+    while(pos < num)
+    {
+        s1[pos] = s2[pos];
+        pos++;
+    }
+    s1[pos] = '\0'; 
 }
 
 
@@ -93,7 +155,24 @@ void my_strncpy(char * s1, const char * s2, int num)
  */
 void my_strcat(char * s1, const char * s2) 
 {
+    int pos1; //Tracks position in the first string
+    int pos2; //Tracks position in the second string
     
+    pos1 = 0;
+    pos2 = 0;
+
+    while(s1[pos1] != '\0')
+    {
+        pos1++;
+    }
+
+    while(s2[pos2] != '\0')
+    {
+        s1[pos1] = s2[pos2];
+        pos1++;
+        pos2++;
+    }
+    s1[pos1] = '\0';
 }
 
 /** 
@@ -107,8 +186,26 @@ void my_strcat(char * s1, const char * s2)
  */
 void my_strncat(char * s1, const char * s2, int num)
 {
-   
-}
+    int pos1; //Tracks position in the first string
+    int pos2; //Tracks position in the second string
+
+    pos1 = 0;
+    pos2 = 0;
+
+    while(s1[pos1] != '\0')
+    {
+        pos1++;
+    }
+
+    while(pos2 < num)
+    {
+        s1[pos1] = s2[pos2];
+        pos1++;
+        pos2++;
+    }
+    s1[pos1] = '\0';
+}   
+
 
 /**
  * Return a pointer to the first occurrence of a null-terminated
@@ -122,6 +219,28 @@ void my_strncat(char * s1, const char * s2, int num)
 
 const char *my_strstr(const char * s1, const char * s2)
 {
+    int pos1; //Tracks position in the first string
+    int pos2; //Tracks position in the second string
+
+    pos1 = 0;
+    pos2 = 0;
+
+    while(s1[pos1] != '\0')
+    {
+        pos2 = 0;
+
+        while(s2[pos2] != '\0')
+        {
+            if(s1[pos1] == s2[pos2])
+            {
+                return s2;
+            }
+            pos2++;
+        }
+        
+        pos1++;
+    }
+
     return NULL;
 }
 
@@ -155,7 +274,52 @@ const char *my_strstr(const char * s1, const char * s2)
  */
 void my_strinsert(char *s1, const char *s2, int pos)
 {
-  
+    
+    int pos1; //Tracks position in the first string
+    int pos2; //Tracks position in the second string
+    int count;
+
+    pos1 = 0;
+    pos2 = 0;
+    count = 0;
+    while(s1[count] != '\0')
+    {
+        count++;
+    }
+
+    while(pos1 < pos)
+    {
+        pos1++;
+    }
+        
+    if (pos >= count)
+    {
+        pos1 = 0;
+        pos2 = 0;
+
+        while(s1[pos1] != '\0')
+        {
+            pos1++;
+        }
+
+        while(s2[pos2] != '\0')
+        {
+            s1[pos1] = s2[pos2];
+            pos1++;
+            pos2++;
+        }
+        s1[pos1] = '\0';
+    }
+    else
+    {
+        while(s2[pos2] != '\0')
+        {
+            s1[count + pos2 + 1] = s2[pos2];
+            pos1++;
+            pos2++;
+        }
+        s1[count + pos2] = '\0';
+    }
 }
 
 /**
