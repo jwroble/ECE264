@@ -274,52 +274,44 @@ const char *my_strstr(const char * s1, const char * s2)
  */
 void my_strinsert(char *s1, const char *s2, int pos)
 {
-    
-    int pos1; //Tracks position in the first string
-    int pos2; //Tracks position in the second string
+     
     int count;
+    int totallen;
+    int pos2;    
 
-    pos1 = 0;
+    totallen = (my_strlen(s1)+my_strlen(s2)); 
     pos2 = 0;
     count = 0;
-    while(s1[count] != '\0')
+
+    char array[totallen];
+
+    while(pos2 < pos)
     {
+        array[count] = s1[count];
         count++;
     }
 
-    while(pos1 < pos)
+    while(s2[pos2] != '\0')
     {
-        pos1++;
+        array[count] = s2[pos2];
+        count++;
+        pos2++;
     }
-        
-    if (pos >= count)
+    
+    while(s1[pos] != '\0')
     {
-        pos1 = 0;
-        pos2 = 0;
+        array[count] = s1[pos];
+        pos++;
+        count++;
+    }
+    
 
-        while(s1[pos1] != '\0')
-        {
-            pos1++;
-        }
-
-        while(s2[pos2] != '\0')
-        {
-            s1[pos1] = s2[pos2];
-            pos1++;
-            pos2++;
-        }
-        s1[pos1] = '\0';
-    }
-    else
+    for(pos2 = 0; pos2 < count; pos2++)
     {
-        while(s2[pos2] != '\0')
-        {
-            s1[count + pos2 + 1] = s2[pos2];
-            pos1++;
-            pos2++;
-        }
-        s1[count + pos2] = '\0';
+        s1[pos2] = array[pos2];
     }
+
+    s1[pos2] = '\0';       
 }
 
 /**
@@ -354,6 +346,28 @@ void my_strinsert(char *s1, const char *s2, int pos)
  */
 void my_strdelete(char *s, int pos, int length)
 {
-  
+    int total;
+    int count;
+    int new;
+
+
+    total = my_strlen(s); 
+    count = pos;
+    new = 0;
+    
+    if( pos == 0 && length > total)
+    {
+        s[0] = '\0';
+    }
+    else
+    {
+        while(new <= (total))
+        {
+            s[count] = s[count+length];
+            count++;
+            new++;
+        }
+        s[count] = '\0';
+    }
 }
 
